@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamer Dashboard Hub</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #050202;
+            --bg-card: #110505;
+            --border-accent: #e61a29;
+            --text-primary: #ffffff;
+            --text-secondary: #8c7374;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#050202] text-white font-['Inter']">
+    <div id="loading" class="fixed inset-0 bg-[#050202] flex items-center justify-center z-50">
+        <div class="text-center">
+            <div
+                class="w-16 h-16 border-4 border-[#e61a29] border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
+            <p class="txt-pure-white">Loading Stream Hub...</p>
+        </div>
+    </div>
+
+    <div id="app" class="max-w-[1120px] mx-auto px-4 py-6 hidden">
+        <header id="mobileHeader" class="md:hidden mb-6 bg-[#110505] border border-[#e61a29] rounded-lg p-4">
+            <div class="flex items-center justify-between">
+                <button id="mobileMenuToggle" class="p-2 hover:bg-black/20 rounded-lg transition-colors">
+                    <i data-lucide="menu"></i>
+                </button>
+                <h1 id="siteTitleMobile" class="txt-pure-white text-xl font-bold"></h1>
+                <div class="w-10"></div>
+            </div>
+        </header>
+
+        <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black/80 z-40 hidden md:hidden"></div>
+
+        <div id="mobileSidebar"
+            class="fixed left-0 top-0 h-full w-80 bg-[#110505] border-r border-[#e61a29] z-50 transform -translate-x-full transition-transform duration-300 md:hidden">
+            <div class="p-4">
+                <button id="closeMobileSidebar" class="absolute right-4 top-4 p-2 hover:bg-black/20 rounded-lg">
+                    <i data-lucide="x"></i>
+                </button>
+                <div id="sidebarContent"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6">
+            <aside id="desktopSidebar" class="md:w-72 lg:w-80 flex-shrink-0 md:sticky md:top-6 md:self-start">
+                <div id="sidebarContentDesktop" class="bg-[#110505] border border-[#e61a29] rounded-lg overflow-hidden">
+                </div>
+            </aside>
+
+            <main class="flex-1">
+                <section id="module1" class="module-container"></section>
+
+                <section id="module2" class="module-container"></section>
+
+                <section id="module3" class="module-container"></section>
+
+                <section id="module4" class="module-container"></section>
+
+                <section id="module5" class="module-container"></section>
+
+                <section id="module6" class="module-container"></section>
+
+                <section id="module7" class="module-container"></section>
+
+                <section id="module8" class="module-container"></section>
+            </main>
+        </div>
+
+        <footer class="mt-8 pt-6 border-t border-[#110505] text-center txt-muted-gray text-sm">
+            <p>Stream Hub v1.0 • Powered by NoizeLoser Brand System</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

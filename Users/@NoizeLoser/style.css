@@ -1,0 +1,313 @@
+/* Custom CSS for NoizeLoser Stream Hub */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --bg-primary: #050202;
+    --bg-card: #110505;
+    --border-accent: #e61a29;
+    --text-primary: #ffffff;
+    --text-secondary: #8c7374;
+    --transition-speed: 0.2s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Typography Classes */
+.txt-crimson-glow {
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-shadow: 0 0 8px rgba(230, 26, 41, 0.7), 0 0 16px rgba(230, 26, 41, 0.4);
+    color: #ff4757;
+}
+
+.txt-heavy-strike {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 0 rgba(115, 0, 10, 0.8);
+    color: #ffffff;
+}
+
+.txt-pure-white {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.txt-muted-gray {
+    color: #8c7374;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.txt-sharp-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+}
+
+/* Module Container */
+.module-container {
+    margin-bottom: 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.module-container:hover {
+    box-shadow: 0 4px 20px rgba(230, 26, 41, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Sidebar Styles */
+.sidebar-banner {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.sidebar-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 3px solid var(--border-accent);
+    object-fit: cover;
+    background-color: var(--bg-card);
+    margin: -48px auto 1.5rem;
+    display: block;
+}
+
+.sidebar-avatar-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.card:hover {
+    box-shadow: 0 4px 20px rgba(230, 26, 41, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Button Styles */
+.btn-crimson {
+    background-color: rgba(230, 26, 41, 0.1);
+    border: 1px solid var(--border-accent);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: all var(--transition-speed) var(--transition-timing);
+    cursor: pointer;
+}
+
+.btn-crimson:hover {
+    background-color: rgba(230, 26, 41, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(230, 26, 41, 0.25);
+}
+
+/* Link Styles */
+.link-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    transition: all var(--transition-speed) var(--transition-timing);
+    border: 1px solid transparent;
+}
+
+.link-item:hover {
+    background-color: rgba(230, 26, 41, 0.05);
+    border-color: rgba(230, 26, 41, 0.3);
+    transform: translateX(4px);
+}
+
+/* Schedule Styles */
+.schedule-day {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--border-accent);
+    background-color: rgba(230, 26, 41, 0.05);
+}
+
+.schedule-day.off {
+    border-left-color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.schedule-day.special {
+    border-left-color: #ff6b81;
+    background-color: rgba(255, 107, 129, 0.05);
+}
+
+/* Shoutout Styles */
+.shoutout-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--border-accent);
+    background-color: rgba(230, 26, 41, 0.05);
+}
+
+.shoutout-rank {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--border-accent);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+/* Support Grid */
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.support-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(230, 26, 41, 0.3);
+    transition: all var(--transition-speed) var(--transition-timing);
+    text-align: center;
+}
+
+.support-item:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 26, 41, 0.15);
+}
+
+/* Twitch Offline State */
+.offline-indicator {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border: 2px dashed var(--text-secondary);
+    border-radius: 0.5rem;
+}
+
+.offline-pulse {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--text-secondary);
+    margin: 0 auto 1rem;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 849px) {
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .module-container {
+        padding: 1rem;
+    }
+
+    .sidebar-avatar {
+        width: 80px;
+        height: 80px;
+        margin: -40px auto 1rem;
+    }
+}
+
+/* Utility Classes */
+.border-crimson {
+    border-color: var(--border-accent);
+}
+
+.bg-crimson-glow {
+    background-color: rgba(230, 26, 41, 0.1);
+}
+
+.text-crimson {
+    color: var(--border-accent);
+}
+
+/* Text Block Styling */
+.text-block-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(230, 26, 41, 0.3);
+}
+
+.text-block-item:last-child {
+    margin-bottom: 0;
+}
+
+.text-block-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.text-block-content {
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-card);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(230, 26, 41, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(230, 26, 41, 0.7);
+}
