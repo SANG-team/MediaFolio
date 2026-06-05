@@ -18,6 +18,10 @@ class StreamHub {
 
             this.checkTwitchStatus();
 
+            setInterval(async () => {
+                await this.checkTwitchStatus();
+            }, 120000);
+
             setTimeout(() => {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('app').classList.remove('hidden');
@@ -214,9 +218,8 @@ class StreamHub {
             </div>
         `;
     }
-
     renderTwitchEmbed(module) {
-        const isLive = false;
+        const isLive = this.isStreamLive;
 
         const title = module.title || 'LIVE NOW';
         const titleStyle = this.getStyleClass(module.titleStyle, 'txt-pure-white');
@@ -224,19 +227,20 @@ class StreamHub {
         const offlineStyle = this.getStyleClass(module.offlineStyle, 'txt-muted-gray');
         const offlineMessage = module.offlineMessage || 'Stream is currently offline. Check schedule below!';
 
+        const parentDomain = window.location.hostname;
+
         if (isLive) {
             return `
                 <h3 class="${titleStyle} text-lg font-bold mb-4">
                     ${title}
                 </h3>
-                <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden border border-[#e61a29]">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <i data-lucide="tv" class="w-12 h-12 text-[#e61a29] mx-auto mb-2"></i>
-                            <p class="txt-pure-white font-semibold">LIVE: ${twitchChannel}</p>
-                            <p class="txt-muted-gray text-sm mt-1">(Twitch embed would appear here)</p>
-                        </div>
-                    </div>
+                <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden border border-[#e61a29]" style="height: 400px;">
+                    <iframe
+                        src="https://twitch.tv{twitchChannel}&parent=${parentDomain}&autoplay=true&muted=true"
+                        height="100%" 
+                        width="100%" 
+                        allowfullscreen="true">
+                    </iframe>
                 </div>
             `;
         } else {
@@ -254,6 +258,7 @@ class StreamHub {
             `;
         }
     }
+
 
     renderAnnouncements(module) {
         let announcementsHTML = module.content.map(item => `
@@ -483,10 +488,38 @@ class StreamHub {
         return style || fallback;
     }
 
-    checkTwitchStatus() {
-        console.log('Twitch status check would happen here');
-    }
+    async checkTwitchStatus() {
+        const twitchModule = this.config.modules.find(m => m.type === 'twitch-embed');
+        const twitchChannel = (twitchModule?.twitchChannel || 'noizeloser').toLowerCase().trim();
 
+        try {
+            const apiUrl = `https://decapi.me/twitch/uptime/${twitchChannel}`;
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера: ${response.status}`);
+            }
+
+            const data = await response.text();
+
+            if (data && !data.toLowerCase().includes('offline')) {
+                this.isStreamLive = true;
+
+                const moduleIndex = this.config.modules.findIndex(m => m.type === 'twitch-embed');
+                if (moduleIndex !== -1) {
+                    this.renderModule(moduleIndex);
+
+                    if (window.lucide) {
+                        lucide.createIcons();
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Не удалось проверить статус Twitch:', error);
+            this.isStreamLive = false;
+        }
+    }
+    
     showError(message) {
         const app = document.getElementById('app');
         app.innerHTML = `
