@@ -1,5 +1,3 @@
-// NoizeLoser Stream Hub - JavaScript Engine
-
 class StreamHub {
     constructor() {
         this.config = null;
@@ -7,29 +5,22 @@ class StreamHub {
         this.twitchPlayer = null;
         this.isStreamLive = false;
 
-        // Initialize
         this.init();
     }
 
     async init() {
         try {
-            // Load configuration
             await this.loadConfig();
 
-            // Set up event listeners
             this.setupEventListeners();
 
-            // Render the entire UI
             this.renderUI();
 
-            // Check Twitch status (simulated - in production you'd call Twitch API)
             this.checkTwitchStatus();
 
-            // Hide loading, show app
             setTimeout(() => {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('app').classList.remove('hidden');
-                // Create icons for any newly rendered elements
                 if (window.lucide) {
                     lucide.createIcons();
                 }
@@ -51,7 +42,6 @@ class StreamHub {
     }
 
     setupEventListeners() {
-        // Mobile menu toggle
         const menuToggle = document.getElementById('mobileMenuToggle');
         const closeMenu = document.getElementById('closeMobileSidebar');
         const overlay = document.getElementById('mobileSidebarOverlay');
@@ -73,7 +63,6 @@ class StreamHub {
             overlay.addEventListener('click', this.closeMobileMenu.bind(this));
         }
 
-        // Window resize
         window.addEventListener('resize', () => {
             this.isMobile = window.innerWidth < 850;
             if (!this.isMobile) {
@@ -94,29 +83,25 @@ class StreamHub {
     renderUI() {
         if (!this.config) return;
 
-        // Set site title
         document.title = this.config.siteTitle;
         document.getElementById('siteTitleMobile').textContent = this.config.siteTitle;
 
-        // Render sidebar (both desktop and mobile)
         this.renderSidebar();
 
-        // Render all modules
-        this.renderModule(1);  // Text Block
-        this.renderModule(2);  // Twitch Embed
-        this.renderModule(3);  // Announcements
-        this.renderModule(4);  // Links
-        this.renderModule(5);  // Support
-        this.renderModule(6);  // Schedule
-        this.renderModule(7);  // Sponsor
-        this.renderModule(8);  // Shoutouts
+        this.renderModule(1);
+        this.renderModule(2);
+        this.renderModule(3);
+        this.renderModule(4);
+        this.renderModule(5);
+        this.renderModule(6);
+        this.renderModule(7);
+        this.renderModule(8);
     }
 
     renderSidebar() {
         const sidebar = this.config.sidebar;
         if (!sidebar.enabled) return;
 
-        // Safely get all properties with defaults
         const bannerImage = sidebar.bannerImage || '';
         const avatarImage = sidebar.avatarImage || '';
         const creatorName = sidebar.creatorName || 'Streamer';
@@ -147,7 +132,6 @@ class StreamHub {
             </div>
         `;
 
-        // Render to both desktop and mobile sidebars
         const sidebarContentEl = document.getElementById('sidebarContent');
         const sidebarContentDesktopEl = document.getElementById('sidebarContentDesktop');
 
@@ -232,8 +216,7 @@ class StreamHub {
     }
 
     renderTwitchEmbed(module) {
-        // Always show offline for now to avoid Twitch API issues
-        const isLive = false; // Set to false to show offline state
+        const isLive = false;
 
         const title = module.title || 'LIVE NOW';
         const titleStyle = this.getStyleClass(module.titleStyle, 'txt-pure-white');
@@ -433,14 +416,11 @@ class StreamHub {
     }
 
     renderShoutouts(module) {
-        // Сортируем массив по рангу, чтобы ранк 100 гарантированно ушел вниз
         const sortedSupporters = [...module.supporters].sort((a, b) => Number(a.rank) - Number(b.rank));
 
         let supportersHTML = sortedSupporters.map(supporter => {
-            // Проверяем, есть ли картинка в JSON
             const hasAvatar = supporter.avatar && supporter.avatar.trim() !== "";
 
-            // Создаем HTML для аватарки только если она указана
             const avatarHTML = hasAvatar ? `
                 <div class="w-10 h-10 rounded-full overflow-hidden border border-[#e61a29] mr-4 flex-shrink-0">
                 <img src="${this.processImagePath(supporter.avatar)}" alt="${supporter.name}" class="w-full h-full object-cover">
@@ -487,20 +467,15 @@ class StreamHub {
 
 
     processImagePath(imagePath) {
-        // Check if imagePath is undefined or null
         if (!imagePath) {
-            // Return a safe placeholder image
             return 'https://static.photos/gaming/320x240/100';
         }
 
-        // Local file resolution engine
         if (imagePath.startsWith('file:')) {
-            // Strip the 'file:' prefix and return relative path
             const path = imagePath.substring(5);
             return path;
         }
 
-        // If it's a placeholder or external URL, return as-is
         return imagePath;
     }
 
@@ -509,8 +484,6 @@ class StreamHub {
     }
 
     checkTwitchStatus() {
-        // In production, implement actual Twitch API check
-        // This is a placeholder for the functionality
         console.log('Twitch status check would happen here');
     }
 
@@ -535,7 +508,6 @@ class StreamHub {
     }
 }
 
-// Initialize the Stream Hub when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.streamHub = new StreamHub();
 }); 
