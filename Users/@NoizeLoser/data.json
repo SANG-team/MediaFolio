@@ -55,7 +55,7 @@
             ]
         },
         "module2": {
-            "enabled": true,
+            "enabled": false,
             "type": "twitchEmbed",
             "title": "ПРЯМОЙ ЭФИР 🎮",
             "titleStyle": "txt-heavy-strike",
