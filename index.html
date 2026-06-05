@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaFolio | Каталог медиа-страниц</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        body { background-color: #050202; color: #ffffff; }
+        .neon-border { border-color: rgba(230, 26, 41, 0.3); }
+        .neon-border:hover { border-color: #e61a29; box-shadow: 0 0 15px rgba(230, 26, 41, 0.4); }
+        .txt-crimson { color: #e61a29; text-shadow: 0 0 10px rgba(230, 26, 41, 0.5); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-6 md:p-12">
+
+    <header class="text-center max-w-2xl mx-auto mb-12">
+        <h1 class="text-4xl md:text-5xl font-black tracking-wider txt-crimson mb-4">MEDIAFOLIO</h1>
+        <p class="text-gray-400 text-sm md:text-base">Единый каталог персональных портфолио стримеров, контент-мейкеров и творческих объединений.</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto w-full flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <section class="bg-[#110505] border border-[#e61a29]/20 rounded-xl p-6">
+            <h2 class="text-xl font-bold border-b border-[#e61a29]/20 pb-3 mb-4 flex items-center gap-2">
+                <span class="txt-crimson">👤</span> ПОЛЬЗОВАТЕЛИ
+            </h2>
+            <div id="users-list" class="space-y-3"></div>
+        </section>
+
+        <section class="bg-[#110505] border border-[#e61a29]/20 rounded-xl p-6">
+            <h2 class="text-xl font-bold border-b border-[#e61a29]/20 pb-3 mb-4 flex items-center gap-2">
+                <span class="txt-crimson">🏢</span> КОРПОРАЦИИ
+            </h2>
+            <div id="corps-list" class="space-y-3"></div>
+        </section>
+    </main>
+
+    <footer class="text-center text-xs text-gray-600 border-t border-[#e61a29]/10 pt-6">
+        &copy; 2026 Powered by SANG team Brand System.
+    </footer>
+
+    <script>
+        async function initCatalog() {
+            try {
+                const response = await fetch('catalog.json');
+                const catalog = await response.json();
+
+                document.getElementById('users-list').innerHTML = catalog.users.map(user => `
+                    <a href="Users/${user.username}/" class="block p-4 bg-black/40 border neon-border rounded-lg transition-all duration-300 group">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-200 group-hover:text-[#e61a29] transition-colors">${user.username}</span>
+                            <span class="text-xs text-gray-500 font-mono">Открыть &rarr;</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">${user.title}</p>
+                    </a>
+                `).join('');
+
+                document.getElementById('corps-list').innerHTML = catalog.corps.map(corp => `
+                    <a href="Corps/${corp.corpname}/" class="block p-4 bg-black/40 border neon-border rounded-lg transition-all duration-300 group">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-200 group-hover:text-[#e61a29] transition-colors">${corp.corpname}</span>
+                            <span class="text-xs text-gray-500 font-mono">Открыть &rarr;</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">${corp.title}</p>
+                    </a>
+                `).join('');
+            } catch (error) {
+                console.error("Ошибка загрузки каталога:", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', initCatalog);
+    </script>
+</body>
+</html>
