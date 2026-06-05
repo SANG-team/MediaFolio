@@ -96,7 +96,7 @@
                 {
                     "name": "YouTube: NoizeLoser",
                     "description": "Основной канал с видео и хайлайтами",
-                    "url": "youtube.com/@NoizeLoser",
+                    "url": "https://youtube.com/@NoizeLoser",
                     "icon": "youtube"
                 },
                 {
@@ -108,37 +108,37 @@
                 {
                     "name": "Telegram: Основной канал",
                     "description": "Анонсы подрубов, мысли и мемы",
-                    "url": "t.me/NoizeLoserChannel",
+                    "url": "https://t.me/NoizeLoserChannel",
                     "icon": "message-circle"
                 },
                 {
                     "name": "Telegram: Art Place",
                     "description": "Творческий уголок и арты",
-                    "url": "t.me/NoizeLoserArtPlace",
+                    "url": "https://t.me/NoizeLoserArtPlace",
                     "icon": "message-circle"
                 },
                 {
                     "name": "Telegram: SANG team",
                     "description": "Канал команды SANG team",
-                    "url": "t.me/SANGteamChannel",
+                    "url": "https://t.me/SANGteamChannel",
                     "icon": "message-circle"
                 },
                 {
                     "name": "Основной Discord сервер",
                     "description": "Голосовые каналы, чат и комьюнити",
-                    "url": "discord.gg/6NVUqEnhby",
+                    "url": "https://discord.gg/6NVUqEnhby",
                     "icon": "discord"
                 },
                 {
                     "name": "Forts Team RU (Telegram)",
                     "description": "Новости русскоязычного сообщества Forts",
-                    "url": "t.me/Com_Forts_NewsRU",
+                    "url": "https://t.me/Com_Forts_NewsRU",
                     "icon": "message-circle"
                 },
                 {
                     "name": "Forts Team RU (Discord)",
                     "description": "Дискорд сервер сообщества",
-                    "url": "discord.gg/pSUuKncKZT",
+                    "url": "https://discord.gg/pSUuKncKZT",
                     "icon": "discord"
                 }
             ]
